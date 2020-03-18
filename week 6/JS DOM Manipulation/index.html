@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS DOM Manipulation</title>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+      integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" type="text/css" href="normalized.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <main class="main">
+        <section class="form-successful-hidden" id="green-label">
+            <i class="fas fa-check-circle"></i>
+            <p class="successful-text"></p>
+            <i class="fas fa-times btn-close"></i>
+        </section>
+        <section class="form-content">
+            <form action="#" method="GET" class="form">
+                <label for="fname"></label>
+                <input type="text" id="fname" name="fname" class="text-input" placeholder="First Name"/> <br><br>
+                <label for="lname"></label>
+                <input type="text" id="lname" name="lname" class="text-input" placeholder="Last Name"/> <br>
+                <div class="gender">
+                    <p>Gender</p>
+                    <input type="radio" id="male" name="gender" value="male"/>
+                    <label for="male">M</label><br>
+                    <input type="radio" id="female" name="gender" value="female"/>
+                    <label for="female">F</label>
+                </div>
+                <label for="message"></label>
+                <textarea id="message" rows="10" cols="50" placeholder="Your message here..."></textarea><br><br>
+                <button type="submit" value="submit" id="btn-submit">Submit</button>
+            </form>
+            <div class="user-img">
+                <i class="fas fa-user"></i>
+            </div>
+        </section>
+    </main>
+</body>
+<script src="app.js"></script>
+</html>
