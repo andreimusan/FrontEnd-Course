@@ -35,6 +35,7 @@ function validateTextInput(name) {
     
     if (name.value == "" || name.length <= 2 || !name.value.match(letters)) {
         name.classList.add('error-red-border');
+        return false;
     } else {
         name.classList.remove('error-red-border');
         return true;
@@ -52,11 +53,13 @@ function validateRadioButton(){
     }
 
     document.querySelector('.gender').style.color = "red";
+    return false;
 }
 
 function validateMessageInput(msg) {
     if (msg.value == "") {
         msg.classList.add('error-red-border');
+        return false;
     } else {
         msg.classList.remove('error-red-border');
         return true;
