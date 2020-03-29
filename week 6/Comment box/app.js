@@ -1,62 +1,123 @@
-const comments = [
-    {
-        id: 'com1',
-        name: 'Andrei',
-        msg: 'Ce faci2?'
+const comments = [{
+    id: "",
+    email: "",
+    msg: ""
+}]
+
+const mainContainer = document.querySelector('#mainContainer');
+const btn = document.querySelector('#addCommentBtn');
+const input = document.querySelector('#addCommentInput');
+
+btn.addEventListener('click', function() {
+    event.preventDefault();
+    let message = validateMessageInput(input);
+
+    if (message) {
+        const newId = Math.floor(Math.random() * 100000);
+
+        comments.push({
+            id: newId,
+            email: "andrei@gmail.com",
+            msg: input.value
+        });
+
+        for (let i = 0; i < comments.length; i++) {
+            if (comments[i].id === newId) {
+                displayComment(comments[i], mainContainer);
+            }
+        }       
     }
-];
 
-const btn = document.querySelector('#commentBtn');
-const input = document.querySelector('#commentInput');
-const commentList = document.querySelector('#commentList');
-
-btn.addEventListener('click', function(){
-    console.log(input.value);
-    comments.push({
-        name: 'Alex',
-        msg: input.value
-    })
-
-    displayComments(comments, commentList)
+    input.value = "";
 });
 
-displayComments(comments, commentList);
+function validateMessageInput(input) {
+    if (input.value == "") {
+        input.classList.add('error-red-border');
+        return false;
+    } else {
+        input.classList.remove('error-red-border');
+        return true;
+    }
+}
 
+function displayComment(oneComment, containerNode) {
 
-function displayComments(comments, containerNode){
+    // add user email address in the new comment div
+    function addEmailAddress(userEmail) {
+        const newEmailAddress = document.createElement("p");
+        newEmailAddress.innerText = userEmail;
+        return newEmailAddress;
+    }
+
+    // add user comment in the new comment div
     function addParagraph(text) {
         const newP = document.createElement("p");
         newP.innerText = text;
         return newP;
     }
-    
-    function addTitle(title) {
-        const h1 = document.createElement("h1");
-        h1.innerText = title;
-        return h1;
+
+    // add user profile image
+    function addProfileImage() {
+        const newImage = document.createElement("i");
+        newImage.classList.add('fas');
+        newImage.classList.add('fa-user');
+        return newImage;
     }
-    
-    
+
+    // add delete button
+    function addDeleteBtn(comment) {
+        const deleteBtn = document.createElement("button");
+        deleteBtn.innerText = "Delete";
+        deleteBtn.type = "button";
+        deleteBtn.id = comment.id;
+        deleteBtn.classList.add('deleteBtn');
+        
+        return deleteBtn;
+    }
+
+    // create comeent div with user image, email and message
     function createCommentNode(comment) {
+        const userBox = document.createElement('div');
+        const imageBox = document.createElement('div');
+        const contentBox = document.createElement('div');
         const containerBox = document.createElement('div');
 
-        const title = addTitle(comment.Name);
-        const p = addParagraph(comment.msg);
+        const image = addProfileImage();       
+        imageBox.appendChild(image);
 
-        containerBox.appendChild(title);
-        containerBox.appendChild(p);
-    
+        const email = addEmailAddress(comment.email);
+        contentBox.appendChild(email);
+        email.classList.add('email');
+
+        const message = addParagraph(comment.msg);       
+        contentBox.appendChild(message);
+        message.classList.add('message');
+
+        userBox.appendChild(imageBox);
+        userBox.appendChild(contentBox);
+        contentBox.classList.add('commentContent');
+        userBox.classList.add('commentContainerContent');
+
+        const deleteBtn = addDeleteBtn(comment);
+        containerBox.appendChild(userBox);
+        containerBox.appendChild(deleteBtn);
+        containerBox.classList.add('newCommentContainer');
+
+        deleteBtn.addEventListener('click', function() {  
+            for (let i = 0; i < comments.length; i++) {
+                if (comments[i].id == this.id) {
+                    containerBox.removeChild(userBox);
+                    containerBox.removeChild(deleteBtn);
+                    containerBox.classList.remove('newCommentContainer');
+                    comments.splice(i, 1);
+                }
+            }  
+        });
+
         return containerBox;
     }
 
-// parcurgem comentarii
-    for (let idx = 0; idx < comments.length; idx++) {
-        // punem in variabila comment fiecare comentariu pe rand
-        const comment = comments[idx];
-        // cream nodul care va afisa in DOM continutul comentariului
-        // creeaza reprezentrea comentariului in DOM
-        const commentNode = createCommentNode(comment);
-        // punem in DOM comentriul
-        containerNode.appendChild(commentNode);
-    }
-}
+    const commentNode = createCommentNode(oneComment);
+    containerNode.appendChild(commentNode);
+};

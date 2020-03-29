@@ -1,16 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Comment Box</title>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+      integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" type="text/css" href="normalized.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
+
 <body>
-    <div>
-        <input id="commentInput" type="text">
-        <button id="commentBtn">Send</button>
-    </div>
-    <div id="commentList"></div>
-    <script src="app.js"></script>
+    <main id="mainContainer">
+        <div class="addCommentContainer">
+            <input id="addCommentInput" class="addCommentBox" type="text" placeholder="Add your message here..." />
+            <button id="addCommentBtn" class="addCommentBtn">Add</button>
+        </div>
+        <!-- <div class="newCommentContainer">
+            <div class="commentContainerContent">
+                <div>
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="commentContent">
+                    <p class="email">andrei@gmail.com</p>
+                    <p class="message">mesaj de interes general</p>
+                </div>
+            </div>
+            <button type="button" class="deleteBtn">Delete</button>
+        </div> -->
+    </main>
+
+    <script src="app2.js"></script>
 </body>
+
 </html>
