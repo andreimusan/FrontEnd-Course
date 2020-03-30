@@ -41,38 +41,33 @@ function validateMessageInput(input) {
     }
 }
 
-// create comeent div with user image, email and message
+// create comment div with user image, email and message
 function displayComment(oneComment, containerNode) {
+    const containerBox = document.createElement('div');
 
-    function createCommentNode(comment) {
-        const containerBox = document.createElement('div');
+    let commentBox = `<div class='commentContainerContent'>
+                        <div><i class='fas fa-user'></i></div>
+                        <div class='commentContent'>
+                            <p class='email'>${oneComment.email}</p>
+                            <p class='message'>${oneComment.msg}</p>
+                        </div>
+                    </div>
+                    <button type='button' class='deleteBtn' id=${oneComment.id}>Delete</button>`;
+    
+    containerBox.innerHTML = commentBox;
+    containerBox.classList.add('newCommentContainer');
+    containerNode.appendChild(containerBox);
 
-        let commentBox = "<div class='commentContainerContent'>" +
-                                "<div><i class='fas fa-user'></i></div>" +
-                                "<div class='commentContent'>" +
-                                    "<p class='email'>" + comment.email + "</p>" +
-                                    "<p class='message'>" + comment.msg + "</p>" +
-                                "</div>" +
-                            "</div>" +
-                        "<button type='button' class='deleteBtn' onclick=\"deleteComment('" + comment.id + "')\">Delete</button>";
-        
-        containerBox.innerHTML = commentBox;
-        containerBox.classList.add('newCommentContainer');
-        containerBox.setAttribute("id", comment.id);
-
-        return containerBox;
-    }
-
-    const commentNode = createCommentNode(oneComment);
-    containerNode.appendChild(commentNode);
+    document.getElementById(oneComment.id).addEventListener('click', function(){
+        deleteComment(oneComment.id);
+    })
 };
 
 // delete comment from main container
-function deleteComment(containerId) {
+function deleteComment(buttonId) {
     for (let i = 0; i < comments.length; i++) {
-        const containerBox = document.getElementById(containerId);
-        if (comments[i].id == containerBox.id) {
-            mainContainer.removeChild(containerBox);
+        if (comments[i].id == buttonId) {
+            document.getElementById(buttonId).parentElement.remove();
             comments.splice(i, 1);
         }
     }
